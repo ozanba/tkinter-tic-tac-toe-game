@@ -1,9 +1,19 @@
 from tkinter import *
 import random
+import sys
+import os
 from tkmacosx import Button
+from tkinter import messagebox
+
+
 root = Tk()
 
 root.title("Tic-Tac-Toe XOX")
+def restart_program():
+   #function for restart button
+    python = sys.executable
+    os.execl(python, python, * sys.argv)
+
 
 def o_first_clicked():
 
@@ -139,6 +149,9 @@ def game():
     #clear button
     clear_button = Button(text="Clear board", padx=30,pady=30, command=clear_board)
     clear_button.grid(row=1, column=5)
+    #restart game
+    restart_button = Button(text="Restart Game", padx=30,pady=30, command=restart_program)
+    restart_button.grid(row=2, column=5)
     
 def b_disable():
     b1["state"] = "disabled"
@@ -256,7 +269,9 @@ def checkwin():
         b6["bg"] = "green"
         b9["bg"] = "green"
         second_player_win = second_player_win +1  
-    
+        
+    elif  b1["text"]!=" " and b2["text"]!=" " and b3["text"]!=" " and b4["text"]!=" " and b5["text"]!=" " and b6["text"]!=" " and b7["text"]!=" "and  b8["text"]!=" " and b9["text"]!=" ":
+        messagebox.showwarning("Draw","DRAW: No one gets point ")
     
     first_player_wins["text"]= "%s First Player: %d" % (first_player,first_player_win ) 
     second_player_wins["text"]= "%s Second Player: %d" % (second_player,second_player_win)   
@@ -276,7 +291,6 @@ multiplayer_button.grid(row=1, column=1)
 
 b_clicked = True 
 count_play = 1
-
 
 def b_click(b):
     global count_play
